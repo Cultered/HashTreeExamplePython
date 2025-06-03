@@ -1,4 +1,6 @@
+"""binary tree node implementation"""
 class Node:
+    """node in binary tree with keyvalue pair"""
     child_left = None
     child_right = None
 
@@ -7,7 +9,8 @@ class Node:
         self.value = value
         self.next = None
 
-    def addChild(self, node):
+    def add_child(self, node):
+        """adds a child node according to key"""
         if self.key == node.key:
             print(f"Trying to add {node}, but {self} exists")
             return
@@ -27,6 +30,7 @@ class Node:
                     current = current.child_right
 
     def contains(self, key):
+        """checks if any connected node or self contains key"""
         if self.key == key:
             return True
         current = self
@@ -40,6 +44,7 @@ class Node:
         return False
 
     def iterate(self):
+        """returns a generator yielding all key-value pairs of the node and children"""
         nodes_to_visit = [self]
         while nodes_to_visit:
             current = nodes_to_visit.pop()
@@ -53,6 +58,7 @@ class Node:
         return f"Node(value={self.value}, key={self.key})"
 
     def imbalance(self):
+        """calculates the difference between the amount of left and right nodes"""
         nodes_to_visit = [self]
         derivation = 0
         while nodes_to_visit:
@@ -65,7 +71,8 @@ class Node:
                 derivation -= 1
         return derivation
 
-    def getByKey(self, key):
+    def get_by_key(self, key):
+        """returns the value of the node by given key or None if not found"""
         if self.key == key:
             return self.value
         current = self
